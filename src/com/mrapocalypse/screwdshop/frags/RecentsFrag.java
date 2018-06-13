@@ -65,7 +65,8 @@ import java.util.List;
 import com.android.settings.R;
 import com.android.internal.util.screwd.screwdUtils;
 import com.android.settings.SettingsPreferenceFragment;
-import com.android.settings.Utils;
+
+import com.mrapocalypse.screwdshop.util.Utils;
 
 import com.android.internal.logging.nano.MetricsProto;
 
@@ -88,6 +89,7 @@ public class RecentsFrag extends SettingsPreferenceFragment implements
     private static final String RECENTS_USE_OMNISWITCH = "recents_use_omniswitch";
     private static final String RECENTS_USE_SLIM= "use_slim_recents";
     private static final String OMNISWITCH_START_SETTINGS = "omniswitch_start_settings";
+    private static final String RECENTS_TYPE = "recents_layout_style";
 
     // Package name of the omnniswitch app
     public static final String OMNISWITCH_PACKAGE_NAME = "org.omnirom.omniswitch";
@@ -109,6 +111,7 @@ public class RecentsFrag extends SettingsPreferenceFragment implements
     private SwitchPreference mRecentsUseOmniSwitch;
     private Preference mOmniSwitchSettings;
     private boolean mOmniSwitchInitCalled;
+    private ListPreference mRecentsType; 
 
     private AlertDialog mDialog;
     private ListView mListView;
@@ -139,6 +142,14 @@ public class RecentsFrag extends SettingsPreferenceFragment implements
                 resolver, Settings.System.IMMERSIVE_RECENTS, 0)));
         mImmersiveRecents.setSummary(mImmersiveRecents.getEntry());
         mImmersiveRecents.setOnPreferenceChangeListener(this);
+
+        // recents type
+        mRecentsType = (ListPreference) findPreference(RECENTS_TYPE);
+        int style = Settings.System.getIntForUser(getContentResolver(),
+                Settings.System.RECENTS_LAYOUT_STYLE, 0, UserHandle.USER_CURRENT);
+        mRecentsType.setValue(String.valueOf(style));
+        mRecentsType.setSummary(mRecentsType.getEntry());
+        mRecentsType.setOnPreferenceChangeListener(this);
 
         mStockIconPacks = (Preference) findPreference("recents_icon_pack");
         mSlimToggle = (SwitchPreference) findPreference("use_slim_recents");
@@ -207,6 +218,14 @@ public class RecentsFrag extends SettingsPreferenceFragment implements
             mOmniSwitchSettings.setEnabled(value);
             updateRecents();
             return true;
+        } else if (preference == mRecentsType) {
+            int style = Integer.valueOf((String) newValue);
+            int index = mRecentsType.findIndexOfValue((String) newValue);
+            Settings.System.putIntForUser(getActivity().getContentResolver(),
+                    Settings.System.RECENTS_LAYOUT_STYLE, style, UserHandle.USER_CURRENT);
+            mRecentsType.setSummary(mRecentsType.getEntries()[index]);
+            Utils.restartSystemUi(getContext());
+        return true;
         }
         return false;
     }

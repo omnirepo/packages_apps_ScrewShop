@@ -131,6 +131,13 @@
     <string name="recents_show_membar_title">Memory bar</string>
     <string name="recents_show_membar_summary">Show a bar with the device\'s available memory</string>
 
+        <!-- AOSP Recents Style -->
+    <string name="recents_type_title">Recents Layout</string>    
+    <string name="recents_stock">Stock</string>
+    <string name="recents_grid">Grid</string> 
+    <string name="stock_recents_layout">Layout</string> 
+    <string name="recents_go">Android Go</string>
+
     <!-- Incall vibrate options -->
     <string name="incall_vibration_category">In-call vibration options</string>
     <string name="incall_vibrate_connect_title">Vibrate on connect</string>
@@ -322,6 +329,9 @@
     <string name="immersive_recents_fullscreen">Fullscreen</string>
     <string name="immersive_recents_statusbar">Statusbar only</string>
     <string name="immersive_recents_navbar">Navbar only</string>
+
+    <string name="systemui_restart_title">SystemUI restart required</string>
+    <string name="systemui_restart_message">For all changes to take effect, a SystemUI restart is required. Restart SystemUI now?</string>
 
     <!-- Hide Apps from Recents -->
     <string name="hide_apps_from_recents_title">Hidden apps</string>
