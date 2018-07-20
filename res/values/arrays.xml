@@ -1267,7 +1267,6 @@
         <item>@string/lockscreen_clock_selection_digital_bold</item>
         <item>@string/lockscreen_clock_selection_sammy</item>
         <item>@string/lockscreen_clock_selection_sammy_bold</item>
-	<item>@string/lockscreen_clock_selection_small</item>
         <item>@string/lockscreen_clock_selection_analog</item>
     </string-array>
 
@@ -1277,7 +1276,6 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>
     </string-array>
 
     <!-- Lockscreen date styles -->
